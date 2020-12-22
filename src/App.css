@@ -14,12 +14,17 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: #a874db;
   text-align: center;
+  background-image: url('./backgrounds/myreads-background.jpg');
+  background-size:cover;
+  background-position:center;
 }
 
 .list-books-title h1 {
+  font-family: 'Playfair Display', serif;
   font-weight: 400;
+  font-size:2.6em;
   margin: 0;
   color: white;
 }
@@ -40,7 +45,10 @@ body, .app {
 }
 
 .bookshelf-title {
-  border-bottom: 1px solid #dedede;
+  font-family: 'Playfair Display', serif;
+  font-size:1.8em;
+  color:#8247bc;
+  text-align:center;
 }
 
 .bookshelf-books {
@@ -58,18 +66,27 @@ body, .app {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  border:0;
+  background: #a874db;
   background-image: url('./icons/add.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0px 0px 31px 0px rgba(168,116,219,0.3);
   font-size: 0;
   outline: 0;
+  transition:all 0.2s;
 }
 
 .open-search button:hover {
-  background-color: rgb(0, 102, 0);
+  background-color: #a44bfc;
+  box-shadow: 0px 0px 31px 0px rgba(168,116,219,0.6);
+  cursor:pointer;
+}
+
+.open-search button:active {
+  background-color: #8247bc;
+  transform:scale(0.9);
 }
 
 
@@ -111,6 +128,7 @@ body, .app {
   font-size: 0;
   border: none;
   outline: none;
+  cursor:pointer;
 }
 
 button:active {
@@ -169,12 +187,24 @@ button:active {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #a874db;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+  transition:0.2s;
+}
+
+.book-shelf-changer:hover {
+  background-color: #a44bfc;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.6);
+  cursor:pointer;
+}
+
+.book-shelf-changer:active {
+  background-color: #8247bc;
+  transform:translateY(2px);
 }
 
 .book-shelf-changer select {
