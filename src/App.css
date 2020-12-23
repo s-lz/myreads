@@ -93,7 +93,6 @@ body, .app {
 /* search page */
 
 .search-books-bar {
-  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
@@ -212,6 +211,22 @@ button:active {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.book-shelf-changer option[value="currentlyReading"]  {
+  color:purple;
+}
+
+.book-shelf-changer option[value="wantToRead"]  {
+  color:orange;
+}
+
+.book-shelf-changer option[value="read"]  {
+  color:green;
+}
+
+.book-shelf-changer option[value="none"]  {
+  color:red;
 }
 
 /* book cover */
