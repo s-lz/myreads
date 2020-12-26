@@ -10,22 +10,22 @@ class Shelf extends Component {
   }
 
   state = {
-    books:[]
+    books:this.props.books
+  }
+
+  changeShelf = (selectValue,book) => {
+    console.log(`Shelf changed.`);
+    BooksAPI.update(book,selectValue)
+      .then(() => {
+
+        // What should I put there?
+        this.setState({ });
+
+      })
   }
 
   render() {
     const showBooks=this.props.books;
-
-    function changeShelf(currentBook,changingTo) {
-      console.log(`Shelf changed to: ${changingTo}`)
-      BooksAPI.update(currentBook,changingTo)
-        .then((books) => {
-          this.setState(() => ({
-            books
-          }))
-        })
-    }
-
     return (
       <div className="bookshelf-books">
         <ol className="books-grid">
@@ -35,12 +35,12 @@ class Shelf extends Component {
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
                   <div className="book-shelf-changer">
-                    <select>
+                    <select value={book.shelf} onChange={(e) => this.changeShelf(e.target.value,book)}>
                       <option value="move" disabled>Move to...</option>
-                      <option value="currentlyReading" onClick={() => changeShelf(book,'currentlyReading')}>Currently Reading</option>
-                      <option value="wantToRead" onClick={() => changeShelf(book,'wantToRead')}>Want to Read</option>
-                      <option value="read" onClick={() => changeShelf(book,'read')}>Read</option>
-                      <option value="none" onClick={() => changeShelf(book,'none')}>Remove</option>
+                      <option value="currentlyReading">Currently Reading</option>
+                      <option value="wantToRead">Want to Read</option>
+                      <option value="read">Read</option>
+                      <option value="none">Remove</option>
                     </select>
                   </div>
                 </div>
