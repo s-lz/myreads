@@ -1,13 +1,57 @@
 //SearchBooks component
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
+import Book from "./Book";
 
 class SearchBooks extends Component {
 
-  
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+  }
+
+  // define state of query and book filter
+  state = {
+      search: '',
+      filterBooks: []
+  }
+
+  // check shelf of books
+  checkShelf = (filterBooks, books) => {
+    return filterBooks.map((fBook)=>{
+      books.forEach((book)=>{
+        if(book.id === fBook.id){
+            fBook.shelf = book.shelf
+        }
+      })
+      return fBook
+    })
+  }
+
+  // update books on search query
+  updateSearch = (search) => {
+    this.setState({search: search.trim() })
+    if (search.length !== 0) {
+      BooksAPI.search(search, 10).then((books) => {
+        if(books.length>0){
+          books = this.checkShelf(books, this.props.books)
+          this.setState({filterBooks: books})
+        }
+        else{
+          this.setState({filterBooks: []})
+        }
+      })
+    } else {
+      this.setState({filterBooks: [], search: ''})
+    }
+  }
 
   render() {
+
+    const { filterBooks } = this.state
+    const { search } = this.state
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -15,20 +59,24 @@ class SearchBooks extends Component {
             <button className="close-search">Close</button>
           </Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
-            <input type="text" placeholder="Search by title or author"/>
-
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={search}
+              onChange={(event) => this.updateSearch(event.target.value)}
+            />
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {filterBooks.map((book) => (
+              <Book
+                key={book.id}
+                book={book}
+                ifShelfChange={(shelf)=>{ this.props.ifShelfChange(book.id,shelf) }}
+              />
+            ))}
+          </ol>
         </div>
       </div>
     )

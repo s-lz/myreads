@@ -81,7 +81,10 @@ class BooksApp extends React.Component {
               </div>
             )} />
             <Route path='/add' render={() => (
-              <SearchBooks books={this.state.books} onShelfChange={(id,shelf) => { this.changeShelf(id,shelf); /* history.push('/') */ }} />
+              <SearchBooks
+                books={this.state.books}
+                ifShelfChange={(id,shelf) => { this.changeShelf(id,shelf); /* history.push('/') */ }}
+              />
             )} />
           </div>
         </div>
