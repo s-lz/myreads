@@ -10,12 +10,17 @@ class ListBooks extends Component {
     books:[]
   }
   componentDidMount() {
-    BooksAPI.getAll()
-      .then((books) => {
-        this.setState(() => ({
-          books
-        }))
+      this.getBooks()
+  }
+
+  changeShelf = (id,shelf = 'read') => {
+      BooksAPI.update({id},shelf).then(() => {
+          this.getBooks()
       })
+  }
+
+  getBooks = () => {
+      BooksAPI.getAll().then((books) => { this.setState({ books }) })
   }
 
   render() {
@@ -30,18 +35,21 @@ class ListBooks extends Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <Shelf
               books={booksCurrentlyReading}
+              ifShelfChange={(bookId,shelf) => { this.changeShelf(bookId,shelf) }}
             />
           </div>
           <div className="bookshelf">
             <h2 className="bookshelf-title">Want to read</h2>
             <Shelf
               books={booksWantToRead}
+              ifShelfChange={(bookId,shelf) => { this.changeShelf(bookId,shelf) }}
             />
           </div>
           <div className="bookshelf">
             <h2 className="bookshelf-title">Read</h2>
             <Shelf
               books={booksRead}
+              ifShelfChange={(bookId,shelf) => { this.changeShelf(bookId,shelf) }}
             />
           </div>
         </div>
