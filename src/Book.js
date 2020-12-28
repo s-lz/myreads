@@ -8,13 +8,15 @@ class Book extends Component {
   }
 
   changeShelf = (e) => {
+      const bookToFadeOut = document.getElementsByClassName(this.props.book.id)
+      bookToFadeOut[0].classList.add("fade-out")
       this.props.ifShelfChange(e.target.value)
   }
 
   render() {
     return (
       <li key={this.props.book.id}>
-        <div className="book">
+        <div className={`book ${this.props.book.id}`}>
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
