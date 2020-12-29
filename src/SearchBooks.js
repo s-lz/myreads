@@ -31,9 +31,9 @@ class SearchBooks extends Component {
 
   // update books on search query
   updateSearch = (search) => {
-    this.setState({search: search.trim() })
+    this.setState({search: search })
     if (search.length !== 0) {
-      BooksAPI.search(search, 10).then((books) => {
+      BooksAPI.search(search.trim(), 10).then((books) => {
         if(books.length>0){
           books = this.checkShelf(books, this.props.books)
           this.setState({filterBooks: books})

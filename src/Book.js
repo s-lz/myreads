@@ -1,6 +1,8 @@
 //ListBooks component
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import missingCover from './icons/cover-missing.jpg';
+
 class Book extends Component {
 
   static propTypes = {
@@ -14,14 +16,18 @@ class Book extends Component {
   }
 
   render() {
+    let thumbnail='';
+
+    typeof this.props.book.imageLinks != "undefined" ? thumbnail=this.props.book.imageLinks.smallThumbnail : thumbnail=missingCover;
+
     return (
       <li key={this.props.book.id}>
         <div className={`book ${this.props.book.id}`}>
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` }}></div>
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
             <div className="book-shelf-changer">
-              <select value={this.props.book.shelf} onChange={this.changeShelf}>
-                <option value="move" disabled>Move to...</option>
+              <select value={this.props.book.shelf ? this.props.book.shelf : 'none'} onChange={this.changeShelf}>
+                {/* <option value="move" disabled>Move to...</option> */}
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>

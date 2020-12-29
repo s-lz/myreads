@@ -2,7 +2,12 @@
 
 This is my version of the MyReads project. I coded the React functionalities as required in the project specifications.
 
-## Slight variations
+## How To Install
+To install the project:
+1. install all project dependencies with `npm install`
+2. start the development server with `npm start`
+
+## Slight Variations
 I have tweaked minor design things:
 
 * changed the main color to purple to differentiate from the main Udacity project;
@@ -13,7 +18,7 @@ I have tweaked minor design things:
 * added CSS animations to move and fade in books on appearance
 * added CSS animations to move and fade out books when they are removed
 
-## What You're Getting
+## Files Included
 ```bash
 ├── CONTRIBUTING.md
 ├── README.md - This file.
